@@ -1,10 +1,18 @@
 const express = require('express');
-const path = require('path');
+
+const {
+  createData,
+  readData,
+  updateData,
+  deleteData,
+} = require('../controllers/fungi_controller');
 
 const router = express.Router();
 
-router.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, '..', 'views', 'index.html'));
-});
+router
+  .post('/fungi', createData)
+  .get('/fungi', readData)
+  .put('/fungi/:id', updateData)
+  .delete('/fungi/:id', deleteData);
 
 module.exports = router;

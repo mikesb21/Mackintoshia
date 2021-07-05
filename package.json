@@ -1,0 +1,24 @@
+{
+  "name": "mackintoshia",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start-server": "concurrently \"cd server\" \"nodemon server.js\"",
+    "start-client": "concurrently \"cd client\" \"vue-cli-service serve\"",
+    "start": "concurrently \"start-server\" \"start-client\"",
+    "install-client": "concurrently \"cd client\" \"yarn install\"",
+    "install-server": "concurrently \"cd server\" \"yarn server\"",
+    "install-packages": "concurrently \"install client\" \"install server\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mikesb21/Mackintoshia.git"
+  },
+  "author": "mikesb21",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mikesb21/Mackintoshia-Web/issues"
+  },
+  "homepage": "https://github.com/mikesb21/Mackintoshia-Web#readme"
+}
