@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <v-app class="basil basil--text">
     <AppBar />
     <v-main>
       <router-view />
@@ -8,8 +8,14 @@
 </template>
 
 <script lang="ts">
+// Vue
 import { Component, Vue } from "vue-property-decorator";
+
+// Components
 import AppBar from "./components/common/AppBar.vue";
+
+// Styles
+import "./assets/App.scss";
 
 @Component({
   components: {
@@ -19,3 +25,15 @@ import AppBar from "./components/common/AppBar.vue";
 class App extends Vue {}
 export default App;
 </script>
+
+<style>
+@font-face {
+  font-family: "KeeponTruckin";
+  src: local("KeeponTruckin"),
+    url(./assets/fonts/KeeponTruckin.ttf) format("truetype");
+}
+
+.title {
+  font-family: "KeeponTruckin";
+}
+</style>

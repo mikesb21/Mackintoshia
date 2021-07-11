@@ -20,7 +20,7 @@ export type Variant = {
 };
 
 export type Fungi = {
-  _id: number;
+  id?: number;
   binomialName: string;
   description: string;
   habitat: string;

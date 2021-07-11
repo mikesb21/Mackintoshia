@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start-server": "concurrently \"cd server\" \"nodemon server.js\"",
-    "start-client": "concurrently \"cd client\" \"vue-cli-service serve\"",
-    "start": "concurrently \"start-server\" \"start-client\"",
+    "start-server": "cd server && nodemon server.js",
+    "start-client": "cd client && vue-cli-service serve",
+    "start": "concurrently \"cd server && nodemon server.js\" \"cd client && yarn run serve\"",
     "install-client": "concurrently \"cd client\" \"yarn install\"",
     "install-server": "concurrently \"cd server\" \"yarn server\"",
     "install-packages": "concurrently \"install client\" \"install server\""

@@ -2,7 +2,7 @@
 
 const Fungi = require('../models/fungi_schema');
 
-const createData = (req, res) => {
+const createFungi = (req, res) => {
   Fungi.create(req.body)
     .then((data) => {
       console.log('New Fungi Created!', data);
@@ -19,7 +19,7 @@ const createData = (req, res) => {
     });
 };
 
-const readData = (req, res) => {
+const readFungiList = (req, res) => {
   Fungi.find()
     .then((data) => {
       res.status(200).json(data);
@@ -30,7 +30,18 @@ const readData = (req, res) => {
     });
 };
 
-const updateData = (req, res) => {
+const readFungi = (req, res) => {
+  Fungi.findById(req.params.id)
+  .then((data) => {
+    res.status(200).json(data);
+  })
+  .catch((err) => {
+    console.error(err);
+    res.status(500).json(err);
+  });
+};
+
+const updateFungi = (req, res) => {
   Fungi.findByIdAndUpdate(req.params.id, req.body, {
     useFindAndModify: false,
     new: true,
@@ -50,7 +61,7 @@ const updateData = (req, res) => {
     });
 };
 
-const deleteData = (req, res) => {
+const deleteFungi = (req, res) => {
   Fungi.findById(req.params.id)
     .then((data) => {
       if (!data) {
@@ -69,8 +80,9 @@ const deleteData = (req, res) => {
 };
 
 module.exports = {
-  createData,
-  readData,
-  updateData,
-  deleteData,
+  createFungi,
+  readFungi,
+  readFungiList,
+  updateFungi,
+  deleteFungi,
 };

@@ -1,18 +1,20 @@
 const express = require('express');
 
 const {
-  createData,
-  readData,
-  updateData,
-  deleteData,
+  createFungi,
+  readFungi,
+  readFungiList,
+  updateFungi,
+  deleteFungi,
 } = require('../controllers/fungi_controller');
 
 const router = express.Router();
 
 router
-  .post('/fungi', createData)
-  .get('/fungi', readData)
-  .put('/fungi/:id', updateData)
-  .delete('/fungi/:id', deleteData);
+  .post('/fungi', createFungi)
+  .get('/fungi', readFungiList)
+  .get('/fungi/:id', readFungi)
+  .put('/fungi/:id', updateFungi)
+  .delete('/fungi/:id', deleteFungi);
 
 module.exports = router;
