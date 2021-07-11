@@ -166,7 +166,7 @@ import { Vue, Component } from "vue-property-decorator";
 import { v4 as uuidv4 } from "uuid";
 
 // Types
-import { Fungi } from "../../interfaces/index";
+import { Fungi } from "../../../interfaces/index";
 
 // Components
 import FungiMycologicalCharacteristic from "./FungiMycologicalCharacteristic.vue";

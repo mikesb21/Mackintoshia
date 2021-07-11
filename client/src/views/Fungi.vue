@@ -2,13 +2,15 @@
   <v-container>
     <v-card>
       <v-parallax dark height="300" :src="currentFungi.images[0]">
-        <v-card-title>
-          <h1>{{ currentFungi.binomial_name }}</h1>
+        <v-card-title class="d-flex justify-center">
+          <h1 class="funky-title">
+            {{ currentFungi.binomial_name }}
+          </h1>
         </v-card-title>
       </v-parallax>
     </v-card>
     <br />
-    <v-card>
+    <v-card color="#CDD7C3">
       <v-tabs v-model="tab" background-color="transparent" color="basil" grow>
         <v-tab>
           Basic Information
@@ -47,7 +49,6 @@
           />
         </v-tab-item>
         <v-tab-item v-if="currentFungi.variants.length > 0">
-          <br />
           <FungiVariants :variants="currentFungi.variants" />
         </v-tab-item>
         <v-tab-item v-if="currentFungi.images.length > 0">

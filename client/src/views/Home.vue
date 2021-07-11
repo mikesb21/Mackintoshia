@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <h1>Recents</h1>
+    <h1 class="funky-title-secondary">Recents</h1>
     <FungiCardContainer />
   </v-container>
 </template>

@@ -1,8 +1,11 @@
 <template>
-  <v-card height="425" width="400" color="#688D7D" rounded>
+  <v-card height="425" width="400" color="#CDD7C3" rounded>
     <v-img height="350" width="400" :src="fungi.images[0]" />
     <v-card-title>
-      <router-link :to="'/fungi/' + fungi._id" class="no-text-decoration">
+      <router-link
+        :to="'/fungi/' + fungi._id"
+        class="no-text-decoration funky-title-secondary"
+      >
         🏷 {{ fungi.binomial_name }}
       </router-link>
     </v-card-title>

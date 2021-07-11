@@ -1,30 +1,34 @@
 <template>
-  <v-simple-table>
-    <template v-slot:default>
-      <thead>
-        <tr>
-          <th class="text-left">
-            Reference Name
-          </th>
-          <th class="text-left">
-            Image
-          </th>
-          <th class="text-left">
-            Description
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="variant in variants" :key="variant._id">
-          <td>{{ variant.reference_name }}</td>
-          <td>
-            <v-img :src="variant.image" height="150" width="150" />
-          </td>
-          <td>{{ variant.description }}</td>
-        </tr>
-      </tbody>
-    </template>
-  </v-simple-table>
+  <v-container style="background-color: #CDD7C3">
+    <v-card elevation="5">
+      <v-simple-table dense style="background-color: #CDD7C3">
+        <template v-slot:default>
+          <thead>
+            <tr>
+              <th class="text-left">
+                Reference Name
+              </th>
+              <th class="text-left">
+                Image
+              </th>
+              <th class="text-left">
+                Description
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="variant in variants" :key="variant._id">
+              <td>{{ variant.reference_name }}</td>
+              <td>
+                <v-img :src="variant.image" height="150" width="150" />
+              </td>
+              <td>{{ variant.description }}</td>
+            </tr>
+          </tbody>
+        </template>
+      </v-simple-table>
+    </v-card>
+  </v-container>
 </template>
 <script lang="ts">
 // Vue
@@ -41,3 +45,11 @@ class FungiVariants extends Vue {
 }
 export default FungiVariants;
 </script>
+
+<style lang="scss">
+tbody {
+  tr:hover {
+    background-color: transparent !important;
+  }
+}
+</style>
