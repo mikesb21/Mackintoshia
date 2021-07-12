@@ -22,6 +22,15 @@
           </v-list-item-content>
         </v-list-item>
         <v-list-item>
+          <v-list-item-avatar>🏛</v-list-item-avatar>
+          <v-list-item-content>
+            <v-list-item-title>Class</v-list-item-title>
+            <v-list-item-subtitle>
+              {{ scientificClassification.class }}
+            </v-list-item-subtitle>
+          </v-list-item-content>
+        </v-list-item>
+        <v-list-item>
           <v-list-item-avatar>📚</v-list-item-avatar>
           <v-list-item-content>
             <v-list-item-title>Order</v-list-item-title>
@@ -35,7 +44,7 @@
           <v-list-item-content>
             <v-list-item-title>Family</v-list-item-title>
             <v-list-item-subtitle>
-              {{ scientificClassification.order }}
+              {{ scientificClassification.family }}
             </v-list-item-subtitle>
           </v-list-item-content>
         </v-list-item>

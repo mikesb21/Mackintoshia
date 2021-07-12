@@ -18,7 +18,7 @@
           </thead>
           <tbody>
             <tr v-for="variant in variants" :key="variant._id">
-              <td>{{ variant.reference_name }}</td>
+              <td>{{ variant.referenceName }}</td>
               <td>
                 <v-img :src="variant.image" height="150" width="150" />
               </td>

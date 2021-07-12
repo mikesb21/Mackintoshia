@@ -6,11 +6,11 @@
         :to="'/fungi/' + fungi._id"
         class="no-text-decoration funky-title-secondary"
       >
-        🏷 {{ fungi.binomial_name }}
+        🏷 {{ fungi.binomialName }}
       </router-link>
     </v-card-title>
     <v-card-subtitle style="color: white">
-      🍄 {{ fungi.scientific_classification.species }}
+      🍄 {{ fungi.scientificClassification.species }}
     </v-card-subtitle>
   </v-card>
 </template>

@@ -96,7 +96,8 @@ import { MycologicalCharacteristics } from "../../../interfaces";
   name: "FungiMycologicalCharacteristics",
 })
 class FungiMycologicalCharacteristics extends Vue {
-  @Prop(Array) readonly mycologicalCharacteristics!: MycologicalCharacteristics;
+  @Prop(Object)
+  readonly mycologicalCharacteristics!: MycologicalCharacteristics;
 }
 export default FungiMycologicalCharacteristics;
 </script>

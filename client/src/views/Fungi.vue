@@ -4,7 +4,7 @@
       <v-parallax dark height="300" :src="currentFungi.images[0].image">
         <v-card-title class="d-flex justify-center">
           <h1 class="funky-title">
-            {{ currentFungi.binomial_name }}
+            {{ currentFungi.binomialName }}
           </h1>
         </v-card-title>
       </v-parallax>
@@ -31,20 +31,20 @@
       <v-tabs-items v-model="tab">
         <v-tab-item>
           <FungiBasicInformation
-            :binomialName="currentFungi.binomial_name"
+            :binomialName="currentFungi.binomialName"
             :description="currentFungi.description"
             :habitat="currentFungi.habitat"
           />
         </v-tab-item>
         <v-tab-item>
           <FungiScientificClassification
-            :scientificClassification="currentFungi.scientific_classification"
+            :scientificClassification="currentFungi.scientificClassification"
           />
         </v-tab-item>
         <v-tab-item>
           <FungiMycologicalCharacteristics
             :mycologicalCharacteristics="
-              currentFungi.mycological_characteristics
+              currentFungi.mycologicalCharacteristics
             "
           />
         </v-tab-item>

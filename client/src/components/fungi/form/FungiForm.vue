@@ -15,14 +15,12 @@
                 required
               />
               <v-textarea
-                append-icon="mdi-script-text"
                 v-model="fungi.description"
                 label="Description"
                 outlined
                 clearable
               />
               <v-textarea
-                append-icon="mdi-pine-tree"
                 v-model="fungi.habitat"
                 label="Habitat"
                 outlined
@@ -34,48 +32,41 @@
             <h3 class="pb-2">Scientific Classification</h3>
             <v-container>
               <v-text-field
-                append-icon="mdi-gamepad-circle-up"
                 v-model="fungi.scientificClassification.kingdom"
                 label="Kingdom"
                 value="Fungi"
                 outlined
               />
               <v-text-field
-                append-icon="mdi-gamepad-circle-right"
                 v-model="fungi.scientificClassification.division"
                 label="Division"
                 value="Basidiomycota"
                 outlined
               />
               <v-text-field
-                append-icon="mdi-gamepad-circle-down"
                 v-model="fungi.scientificClassification.class"
                 label="Class"
                 value="Agaricomycetes"
                 outlined
               />
               <v-text-field
-                append-icon="mdi-gamepad-circle-left"
                 v-model="fungi.scientificClassification.order"
                 label="Order"
                 value="Agaricales"
                 outlined
               />
               <v-text-field
-                append-icon="mdi-gamepad-circle-outline"
                 v-model="fungi.scientificClassification.family"
                 label="Family"
                 outlined
               />
               <v-text-field
-                append-icon="mdi-gamepad-circle"
                 v-model="fungi.scientificClassification.genus"
                 label="Genus"
                 outlined
                 clearable
               />
               <v-text-field
-                append-icon="mdi-mushroom"
                 v-model="fungi.scientificClassification.species"
                 label="Species"
                 outlined
@@ -87,7 +78,7 @@
             <h3 class="pb-2">Mycological Characteristics</h3>
             <v-col class="d-flex flex-column" cols="auto">
               <v-select
-                :items="gillsList"
+                :items="selects.GILLS"
                 v-model="fungi.mycologicalCharacteristics.gills"
                 label="Gills"
                 item-text="description"
@@ -95,7 +86,7 @@
                 outlined
               />
               <v-select
-                :items="capList"
+                :items="selects.CAP"
                 v-model="fungi.mycologicalCharacteristics.cap"
                 label="Cap"
                 item-text="description"
@@ -103,7 +94,7 @@
                 outlined
               />
               <v-select
-                :items="hymeniumList"
+                :items="selects.HYMENIUM"
                 v-model="fungi.mycologicalCharacteristics.hymenium"
                 label="Hymenium"
                 item-text="description"
@@ -111,7 +102,7 @@
                 outlined
               />
               <v-select
-                :items="stipeList"
+                :items="selects.STIPE"
                 v-model="fungi.mycologicalCharacteristics.stipe"
                 label="Stipe"
                 item-text="description"
@@ -119,7 +110,7 @@
                 outlined
               />
               <v-select
-                :items="sporeList"
+                :items="selects.SPORE"
                 v-model="fungi.mycologicalCharacteristics.spore"
                 label="Spore"
                 item-text="description"
@@ -127,7 +118,7 @@
                 outlined
               />
               <v-select
-                :items="ecologyList"
+                :items="selects.ECOLOGY"
                 v-model="fungi.mycologicalCharacteristics.ecology"
                 label="Ecology"
                 item-text="description"
@@ -135,7 +126,7 @@
                 outlined
               />
               <v-select
-                :items="edibilityList"
+                :items="selects.EDIBILITY"
                 v-model="fungi.mycologicalCharacteristics.edibility"
                 label="Edibility"
                 item-text="description"
@@ -148,7 +139,7 @@
         <v-row no-gutters>
           <v-col class="form-container col-5" align="center">
             <h3 class="pb-2">Images</h3>
-            <div v-for="image in fungi.images" :key="image.id">
+            <div v-for="(image, counter) in fungi.images" :key="counter">
               <v-list-item>
                 <v-text-field
                   v-model="image.image"
@@ -157,6 +148,9 @@
                   outlined
                   clearable
                 />
+                <v-btn icon x-large @click="deleteInput('image', counter)">
+                  ❌
+                </v-btn>
               </v-list-item>
             </div>
             <v-btn
@@ -172,7 +166,7 @@
           </v-col>
           <v-col class="form-container" align="center">
             <h3 class="pb-2">Variants</h3>
-            <div v-for="variant in fungi.variants" :key="variant.id">
+            <div v-for="(variant, counter) in fungi.variants" :key="counter">
               <v-list-item>
                 <v-row>
                   <v-col>
@@ -196,13 +190,15 @@
                   <v-col>
                     <v-textarea
                       v-model="variant.description"
-                      append-icon="mdi-script-text"
                       label="Description"
                       outlined
                       clearable
                     />
                   </v-col>
                 </v-row>
+                <v-btn icon x-large @click="deleteInput('variant', counter)">
+                  ❌
+                </v-btn>
               </v-list-item>
             </div>
             <v-btn
@@ -234,11 +230,15 @@
 import { Vue, Component } from "vue-property-decorator";
 
 // Types
-import { Fungi } from "../../../interfaces/index";
+import { Fungi, MycologicalCharacteristic } from "../../../interfaces/index";
+import * as selectsContent from "../../../interfaces/constants";
 
 // Components
 import FungiMycologicalCharacteristic from "./FungiMycologicalCharacteristic.vue";
 import FungiVariant from "./FungiVariant.vue";
+
+// Apis
+import FungiApi from "../../../apis/fungi-api";
 
 @Component({
   name: "FungiForm",
@@ -248,6 +248,13 @@ import FungiVariant from "./FungiVariant.vue";
   },
 })
 class FungiForm extends Vue {
+  fungiApi = new FungiApi();
+
+  emptyMycologicalCharacteristic: MycologicalCharacteristic = {
+    images: [""],
+    description: "",
+  };
+
   fungi: Fungi = {
     binomialName: "",
     description: "",
@@ -262,134 +269,19 @@ class FungiForm extends Vue {
       species: "",
     },
     mycologicalCharacteristics: {
-      gills: {
-        images: [""],
-        description: "",
-      },
-      cap: {
-        images: [""],
-        description: "",
-      },
-      hymenium: {
-        images: [""],
-        description: "",
-      },
-      stipe: {
-        images: [""],
-        description: "",
-      },
-      spore: {
-        images: [""],
-        description: "",
-      },
-      ecology: {
-        images: [""],
-        description: "",
-      },
-      edibility: {
-        images: [""],
-        description: "",
-      },
+      gills: this.emptyMycologicalCharacteristic,
+      cap: this.emptyMycologicalCharacteristic,
+      hymenium: this.emptyMycologicalCharacteristic,
+      stipe: this.emptyMycologicalCharacteristic,
+      spore: this.emptyMycologicalCharacteristic,
+      ecology: this.emptyMycologicalCharacteristic,
+      edibility: this.emptyMycologicalCharacteristic,
     },
     variants: [],
     images: [],
   };
 
-  gillsList = [
-    {
-      images: [
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Gills_icon.png/64px-Gills_icon.png",
-      ],
-      description: "Gills on hymenium",
-    },
-  ];
-
-  capList = [
-    {
-      images: [
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Conical_cap_icon.svg/64px-Conical_cap_icon.svg.png",
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/Umbonate_cap_icon.svg/64px-Umbonate_cap_icon.svg.png",
-      ],
-      description: "Cap is conical or umbonate",
-    },
-    { images: [""], description: "Cap is flat or convex" },
-    { images: [""], description: "Cap is campanulate or convex" },
-  ];
-
-  hymeniumList = [
-    {
-      images: [""],
-      description: "Hymenium is adnate or adnexed",
-    },
-    {
-      images: [""],
-      description: "Hymenium is free",
-    },
-    {
-      images: [
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Adnate_gills_icon2.svg/64px-Adnate_gills_icon2.svg.png",
-      ],
-      description: "Hymenium is adnate",
-    },
-  ];
-
-  stipeList = [
-    {
-      images: [
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Bare_stipe_icon.svg/64px-Bare_stipe_icon.svg.png",
-      ],
-      description: "Stipe is bare",
-    },
-    {
-      images: [""],
-      description: "Stipe has a ring and volva",
-    },
-  ];
-
-  sporeList = [
-    {
-      images: [
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7d/Transparent_spore_print_icon.svg/64px-Transparent_spore_print_icon.svg.png",
-      ],
-      description: "Spore print is purple-brown",
-    },
-    {
-      images: [""],
-      description: "Spore print is black",
-    },
-    {
-      images: [""],
-      description: "Spore print is white",
-    },
-  ];
-
-  ecologyList = [
-    {
-      images: [
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Saprotrophic_fungus.svg/64px-Saprotrophic_fungus.svg.png",
-      ],
-      description: "Ecology is saprotrophic",
-    },
-    {
-      images: [""],
-      description: "Ecology is mycorrhizal",
-    },
-  ];
-
-  edibilityList = [
-    {
-      images: [
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Mycomorphbox_Psychoactive.png/64px-Mycomorphbox_Psychoactive.png",
-      ],
-      description: "Edibility: psychoactive",
-    },
-    {
-      images: [
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Mycomorphbox_Psychoactive.png/64px-Mycomorphbox_Psychoactive.png",
-      ],
-      description: "Edibility: poisonous or psychoactive",
-    },
-  ];
+  selects = selectsContent;
 
   addInput(input: string) {
     switch (input) {
@@ -408,8 +300,28 @@ class FungiForm extends Vue {
     }
   }
 
-  submitForm() {
+  deleteInput(input: string, counter: number) {
+    switch (input) {
+      case "variant":
+        this.fungi.variants.splice(counter, 1);
+        break;
+      case "image":
+        this.fungi.images.splice(counter, 1);
+        break;
+      default:
+        break;
+    }
+  }
+
+  async submitForm() {
     console.log("Fungi", this.fungi);
+    let response;
+    try {
+      response = await this.fungiApi.addFungi(this.fungi);
+    } catch (error) {
+      console.log(error);
+    }
+    return console.log("Response", response);
   }
 }
 export default FungiForm;

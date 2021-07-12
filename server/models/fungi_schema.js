@@ -1,6 +1,6 @@
 const { Schema, model } = require('mongoose');
 
-const scientific_classificationSchema = new Schema({
+const scientificClassificationSchema = new Schema({
   kingdom: {
     type: String,
     required: [true, 'Kingdom is required']
@@ -31,7 +31,7 @@ const scientific_classificationSchema = new Schema({
   }
 })
 
-const mycological_characteristicsSchema = new Schema({
+const mycologicalCharacteristicsSchema = new Schema({
   gills: {
     images: {
       type: [String],
@@ -108,19 +108,17 @@ const variantSchema = new Schema({
   image: {
     type: String
   },
-  reference_name: {
+  referenceName: {
     type: String,
-    required: [true, 'Name is required']
   },
   description: {
     type: String,
-    required: [true, 'Description is required']
   }
 })
 
 const fungiSchema = new Schema(
   {
-    binomial_name: {
+    binomialName: {
       type: String,
       required: [true, 'name field is required'],
     },
@@ -132,13 +130,14 @@ const fungiSchema = new Schema(
       type: String,
       required: [true, 'Habitat is required']
     },
-    scientific_classification: scientific_classificationSchema,
-    mycological_characteristics: mycological_characteristicsSchema,
+    scientificClassification: scientificClassificationSchema,
+    mycologicalCharacteristics: mycologicalCharacteristicsSchema,
     variants: [variantSchema],
     images: [
       {
         image: {
-          type: String
+          type: String,
+          required: [true, 'Images are required']
         }
     }
   ]
