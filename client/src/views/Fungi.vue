@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <v-card>
-      <v-parallax dark height="300" :src="currentFungi.images[0]">
+      <v-parallax dark height="300" :src="currentFungi.images[0].image">
         <v-card-title class="d-flex justify-center">
           <h1 class="funky-title">
             {{ currentFungi.binomial_name }}
@@ -114,6 +114,7 @@ class Fungi extends Vue {
     } catch (error) {
       console.error(error);
     }
+    console.log("Current Fungi", this.currentFungi);
   }
 }
 export default Fungi;

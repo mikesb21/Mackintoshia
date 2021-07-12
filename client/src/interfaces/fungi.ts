@@ -9,8 +9,18 @@ export type ScientificClassification = {
 };
 
 export type MycologicalCharacteristic = {
-  image: string;
+  images: Array<string>;
   description: string;
+};
+
+export type MycologicalCharacteristics = {
+  gills: MycologicalCharacteristic;
+  cap: MycologicalCharacteristic;
+  hymenium: MycologicalCharacteristic;
+  stipe: MycologicalCharacteristic;
+  spore: MycologicalCharacteristic;
+  ecology: MycologicalCharacteristic;
+  edibility: MycologicalCharacteristic;
 };
 
 export type Variant = {
@@ -19,13 +29,15 @@ export type Variant = {
   description: string;
 };
 
+export type Image = { image: string };
+
 export type Fungi = {
   id?: number;
   binomialName: string;
   description: string;
   habitat: string;
   scientificClassification: ScientificClassification;
-  mycologicalCharacteristics: Array<MycologicalCharacteristic>;
+  mycologicalCharacteristics: MycologicalCharacteristics;
   variants: Array<Variant>;
-  images: Array<string>;
+  images: Array<Image>;
 };

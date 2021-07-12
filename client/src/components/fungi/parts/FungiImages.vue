@@ -5,7 +5,7 @@
         <v-carousel-item
           v-for="(image, i) in images"
           :key="i"
-          :src="image"
+          :src="image.image"
           contain
           reverse-transition="fade-transition"
           transition="fade-transition"
@@ -24,6 +24,10 @@ import { Vue, Component, Prop } from "vue-property-decorator";
 })
 class FungiImages extends Vue {
   @Prop(Array) readonly images!: Array<string>;
+
+  mounted() {
+    console.log("Images", this.images);
+  }
 }
 export default FungiImages;
 </script>

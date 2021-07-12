@@ -31,14 +31,76 @@ const scientific_classificationSchema = new Schema({
   }
 })
 
-const mycological_characteristicSchema = new Schema({
-  images: {
-    type: [String],
-    required: [true, 'Images are required']
+const mycological_characteristicsSchema = new Schema({
+  gills: {
+    images: {
+      type: [String],
+      required: [true, 'Images are required']
+    },
+    description: {
+      type: String,
+      required: [true, 'Description is required']
+    }
   },
-  description: {
-    type: String,
-    required: [true, 'Description is required']
+  cap: {
+    images: {
+      type: [String],
+      required: [true, 'Images are required']
+    },
+    description: {
+      type: String,
+      required: [true, 'Description is required']
+    }
+  },
+  hymenium: {
+    images: {
+      type: [String],
+      required: [true, 'Images are required']
+    },
+    description: {
+      type: String,
+      required: [true, 'Description is required']
+    }
+  },
+  stipe: {
+    images: {
+      type: [String],
+      required: [true, 'Images are required']
+    },
+    description: {
+      type: String,
+      required: [true, 'Description is required']
+    }
+  },
+  spore: {
+    images: {
+      type: [String],
+      required: [true, 'Images are required']
+    },
+    description: {
+      type: String,
+      required: [true, 'Description is required']
+    }
+  },
+  ecology: {
+    images: {
+      type: [String],
+      required: [true, 'Images are required']
+    },
+    description: {
+      type: String,
+      required: [true, 'Description is required']
+    }
+  },
+  edibility: {
+    images: {
+      type: [String],
+      required: [true, 'Images are required']
+    },
+    description: {
+      type: String,
+      required: [true, 'Description is required']
+    }
   }
 });
 
@@ -71,12 +133,15 @@ const fungiSchema = new Schema(
       required: [true, 'Habitat is required']
     },
     scientific_classification: scientific_classificationSchema,
-    mycological_characteristics: [mycological_characteristicSchema],
+    mycological_characteristics: mycological_characteristicsSchema,
     variants: [variantSchema],
-    images: {
-      type: [String],
-      required: [true, 'Images are required']
+    images: [
+      {
+        image: {
+          type: String
+        }
     }
+  ]
   },
   { timestamps: true },
 );

@@ -1,6 +1,6 @@
 <template>
   <v-card height="425" width="400" color="#CDD7C3" rounded>
-    <v-img height="350" width="400" :src="fungi.images[0]" />
+    <v-img height="350" width="400" :src="fungi.images[0].image" />
     <v-card-title>
       <router-link
         :to="'/fungi/' + fungi._id"

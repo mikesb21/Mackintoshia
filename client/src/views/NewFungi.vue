@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <h1 class="funky-title-secondary">Add Fungi</h1>
-    <Form />
+    <FungiForm />
   </v-container>
 </template>
 
@@ -10,12 +10,12 @@
 import { Vue, Component } from "vue-property-decorator";
 
 // Components
-import Form from "../components/fungi/form/FungiForm.vue";
+import FungiForm from "../components/fungi/form/FungiForm.vue";
 
 @Component({
   name: "NewFungi",
   components: {
-    Form,
+    FungiForm,
   },
 })
 class NewFungi extends Vue {}
